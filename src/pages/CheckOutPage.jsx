@@ -1,20 +1,22 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useCard } from '../context/CardProvider'
+// import { useCard } from '../context/CardProvider'
 import BasketCard from '../components/BasketCard'
 import BasketSideBar from '../components/BasketSideBar'
 import { FaArrowLeft } from 'react-icons/fa'
 
 import basket from '../assets/basket.png'
 function CheckOutPage() {
-  const [state,dispatch]=useCard()
-  const clickHandeler=(type,payload)=>{dispatch({type,payload})}
+  // const [state,dispatch]=useCard()
+  // const clickHandeler=(type,payload)=>{dispatch({type,payload})}
 
   console.log(state.selectedItems.length)
   return (
     
-    // <div className='flex justify-between items-start p-2.5 min-h-[1000px]'>
-    <div className={state.selectedItems.length===0? "w-50 md:w-[400px] m-[0_auto] ":'flex justify-end flex-col-reverse md:flex-row md:justify-between items-center md:items-start p-2.5 min-h-[1000px]'}>
+    <>
+    <h1>checkout page</h1>
+
+     <div className={state.selectedItems.length===0? "w-50 md:w-[400px] m-[0_auto] ":'flex justify-end flex-col-reverse md:flex-row md:justify-between items-center md:items-start p-2.5 min-h-[1000px]'}>
       {state.selectedItems.length===0&& 
         <div className='flex m-[0_auto] w-50 md:w-[100%]  flex-col '>
           <img className='size-30 md:size-70 m-[0_auto]' src={basket} alt="empty basket image" />
@@ -36,8 +38,9 @@ function CheckOutPage() {
       
       </>
       }
-  
     </div>
+    </>
+   
   )
 }
 

@@ -1,14 +1,16 @@
 import React, { use, useEffect, useState } from 'react'
-import { useProducts } from '../context/ProductsContext'
 import Card from '../components/Card'
 import {BarLoader } from 'react-spinners'
 import { searchProducts,filterProducts, createQueryObject, getInitialQuery } from '../helper/helper'
 import { useSearchParams } from 'react-router-dom'
 import SearchBox from '../components/SearchBox'
 import SideBar from '../components/SideBar'
+// import { useProducts } from '../context/ProductsContext'
+
 
 function Products() {
-  const products=useProducts()
+  const products=[]
+  // const products=useProducts()
   const [displayed,setDisplayed]=useState([])
 
   const [search,setSearch]=useState("")
