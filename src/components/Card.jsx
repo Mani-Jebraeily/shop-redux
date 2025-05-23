@@ -4,16 +4,15 @@ import{TbListDetails} from 'react-icons/tb'
 import { TbShoppingBagCheck } from 'react-icons/tb';
 import { MdDeleteOutline } from 'react-icons/md';
 import { producyQuantity, shortenText } from '../helper/helper';
-// import { useCard } from '../context/CardProvider';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem, decrease, increase, removeItem } from '../features/cart/cartSlice';
 
 function Card({data}) {
     const {id,image,title,price}=data;
-    // const [state,dispatch]=useCard()
-    // const quantity=producyQuantity(state,id)
-    const quantity=0
-    const clickHandeler=(type)=>{
-      // dispatch({type,payload:data})
-    }
+    const state=useSelector((store)=>store.cart)
+    console.log(state)
+    const quantity=producyQuantity(state,id)
+    const dispath=useDispatch()
   return (
     <div className='w-67.5  m-2.5  p-5  gap-1 flex flex-col items-center justify-end  bg-[#fff] border-[2px] border-dashed border-[#e2e2e2] rounded-[20px]'> 
         <img src={image} alt={title} className='size-57.5  p-5 mb-5 bg-[#fff]' />
@@ -29,14 +28,14 @@ function Card({data}) {
           
           <div className='flex items-center'>
                         {quantity===1&&(
-                               <button onClick={()=>clickHandeler("REMOVE_ITEM")} className='bg-[#fe5d42] text-[#fff] border-none text-[1.7rem] size-8 leading-8 p-0.5 rounded-lg cursor-pointer flex justify-center'>
+                               <button onClick={()=>dispath(removeItem(data))} className='bg-[#fe5d42] text-[#fff] border-none text-[1.7rem] size-8 leading-8 p-0.5 rounded-lg cursor-pointer flex justify-center'>
                                <MdDeleteOutline/>
                              </button>
                           )}
               
               
                         {quantity>1&&(
-                          <button onClick={()=>clickHandeler("DECREASE")} className='bg-[#fe5d42] text-[#fff] border-none text-[1.7rem] size-8 leading-8 p-0.5 rounded-lg cursor-pointer flex justify-center items-center'>-</button>
+                          <button onClick={()=>dispath(decrease(data))} className='bg-[#fe5d42] text-[#fff] border-none text-[1.7rem] size-8 leading-8 p-0.5 rounded-lg cursor-pointer flex justify-center items-center'>-</button>
                           )}
 
                          {!!quantity &&(
@@ -45,11 +44,11 @@ function Card({data}) {
                       
               
                           {quantity===0?
-                              <button onClick={()=>clickHandeler("ADD_ITEM")} className='bg-[#fe5d42] text-[#fff] border-none text-[1.7rem] size-8 leading-8 p-0.5 rounded-lg cursor-pointer flex justify-center'>
+                              <button onClick={()=>dispath(addItem(data))} className='bg-[#fe5d42] text-[#fff] border-none text-[1.7rem] size-8 leading-8 p-0.5 rounded-lg cursor-pointer flex justify-center'>
                               <TbShoppingBagCheck/>
                            </button>
                           :
-                          <button onClick={()=>clickHandeler("INCREASE")} className='bg-[#fe5d42] text-[#fff] border-none text-[1.7rem] size-8 leading-8 p-0.5 rounded-lg cursor-pointer flex justify-center items-center'>+</button>
+                          <button onClick={()=>dispath(increase(data))} className='bg-[#fe5d42] text-[#fff] border-none text-[1.7rem] size-8 leading-8 p-0.5 rounded-lg cursor-pointer flex justify-center items-center'>+</button>
                           }
           </div>
          
