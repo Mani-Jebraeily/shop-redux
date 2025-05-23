@@ -5,11 +5,16 @@ import { searchProducts,filterProducts, createQueryObject, getInitialQuery } fro
 import { useSearchParams } from 'react-router-dom'
 import SearchBox from '../components/SearchBox'
 import SideBar from '../components/SideBar'
+import { fetchProducts } from '../features/product/productsSlice.js'
+import {useSelector,useDispatch} from "react-redux"
 // import { useProducts } from '../context/ProductsContext'
 
 
+
 function Products() {
-  const products=[]
+  const dispatch=useDispatch()
+  const {products,loading}=useSelector((store)=>store.products)
+  // const products=[]
   // const products=useProducts()
   const [displayed,setDisplayed]=useState([])
 
@@ -18,6 +23,12 @@ function Products() {
   const [searchParams,setSearchParams]=useSearchParams()
 
 // console.log(query)
+
+useEffect(()=>{
+  dispatch(fetchProducts())
+},[])
+
+
   useEffect(()=>{
     setDisplayed(products)
 
@@ -41,7 +52,7 @@ function Products() {
      <div className='flex flex-col-reverse  justify-center lg:flex-row'> 
 
         <div className='w-[100%] flex flex-wrap justify-between justify -center items-center'> 
-          {!displayed.length&&(
+          {loading&&(
             <div className='h-100 w-[100%] text-center  m-auto grid place-items-center '>
               <BarLoader />
              </div> 

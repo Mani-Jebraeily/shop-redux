@@ -1,16 +1,31 @@
-import React from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { useProductDetails } from '../context/ProductsContext'
+import { useEffect } from 'react'
+
+// import { useProductDetails } from '../context/ProductsContext'
 import { SiOpenproject } from 'react-icons/si'
 import { IoMdPricetag } from 'react-icons/io'
 import { FaArrowLeft } from 'react-icons/fa'
+import { useSelector,useDispatch } from 'react-redux'
+import { fetchProducts } from '../features/product/productsSlice'
+import {BarLoader } from 'react-spinners'
+
 
 function DetailsPage() {
   const {id}=useParams()
+  const dispatch=useDispatch()
 
-  const productDetails=useProductDetails(+id)
+  const productDetails=useSelector((store)=>store.products.products.find((i)=>i.id===+id))
+  // const productDetails=useProductDetails(+id)
 
-  // if(!productsDetails)return <Loader 
+  useEffect(()=>{
+  dispatch(fetchProducts())
+},[])
+
+     if(!productDetails) return (
+            <div className='h-100 w-[100%] text-center  m-auto grid place-items-center '>
+              <BarLoader />
+             </div> 
+     )  
   return (
     <div className='flex flex-col md:flex-row items-start min-h-[1000px] w-[100%] '>
       <div className='  w-[274px] md:w-[450px] m-[0_auto] mb-5 md:m-2.5 md:mr-[50px] '>
