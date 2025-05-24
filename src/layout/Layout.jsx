@@ -1,9 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { PiShoppingCartSimple } from 'react-icons/pi'
+import { useSelector } from 'react-redux'
 // import { useCard } from '../context/CardProvider'
 
 function Layout({children}) {
+  const state=useSelector((store)=>{store.cart})
     // const [state]=useCard()
   return (
     <>
