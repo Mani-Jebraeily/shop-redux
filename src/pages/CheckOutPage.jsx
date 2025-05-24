@@ -16,7 +16,6 @@ function CheckOutPage() {
   return (
     
     <>
-    <h1>checkout page</h1>
 
      <div className={state.selectedItems.length===0? "w-50 md:w-[400px] m-[0_auto] ":'flex justify-end flex-col-reverse md:flex-row md:justify-between items-center md:items-start p-2.5 min-h-[1000px]'}>
       {state.selectedItems.length===0&& 

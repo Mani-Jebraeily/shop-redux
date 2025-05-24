@@ -2,9 +2,12 @@ import React from 'react'
 import { shortenText } from '../helper/helper'
 import { MdDeleteOutline } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { decrease, increase, removeItem } from '../features/cart/cartSlice';
 
 
-function BasketCard({data,clickHandeler}) {
+function BasketCard({data}) {
+  const dispatch=useDispatch()
   return (
     <div className='w-75 sm:w-auto m-[0_auto] flex flex-col gap-3 sm:gap-0 sm:flex-row items-center  sm:justify-between border-[2px] border-dashed border-[#e2e2e2] rounded-[20px] mb-3 p-3 '>
         <Link to={`/Products/${data.id}`}>
@@ -16,12 +19,12 @@ function BasketCard({data,clickHandeler}) {
         </Link>
         <p>{data.price} $</p>
         <div className='flex items-center'>
-            {data.quantity===1&&(<button className='bg-[#fe5d42] text-[#fff] border-none text-[1.3rem] size-[25px] leading-[25px] p-0.5 rounded-lg cursor-pointer' onClick={()=>clickHandeler("REMOVE_ITEM",data)}> <MdDeleteOutline/></button>)}
-            {data.quantity>1&&(<button className='flex justify-center items-center bg-[#fe5d42] text-[#fff] border-none text-[1.3rem] size-[25px] leading-[25px] p-0.5 rounded-lg cursor-pointer' onClick={()=>clickHandeler("DECREASE",data)}>-</button>)}
+            {data.quantity===1&&(<button className='bg-[#fe5d42] text-[#fff] border-none text-[1.3rem] size-[25px] leading-[25px] p-0.5 rounded-lg cursor-pointer' onClick={()=>dispatch(removeItem(data))}> <MdDeleteOutline/></button>)}
+            {data.quantity>1&&(<button className='flex justify-center items-center bg-[#fe5d42] text-[#fff] border-none text-[1.3rem] size-[25px] leading-[25px] p-0.5 rounded-lg cursor-pointer' onClick={()=>dispatch(decrease(data))}>-</button>)}
             <span className='w-5 text-center m-[0_2px]'>
               {data.quantity}
             </span>
-            <button className='flex justify-center items-center bg-[#fe5d42] text-[#fff] border-none text-[1.3rem] size-[25px] leading-[25px] p-0.5 rounded-lg cursor-pointer' onClick={()=>clickHandeler("INCREASE",data)}>+</button>
+            <button className='flex justify-center items-center bg-[#fe5d42] text-[#fff] border-none text-[1.3rem] size-[25px] leading-[25px] p-0.5 rounded-lg cursor-pointer' onClick={()=>dispatch(increase(data))}>+</button>
 
         </div>
     </div>
