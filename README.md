@@ -23,8 +23,7 @@ This project is a simulated web application of an online store, developed using 
 ### Technologies Used:
 - React.Js
 - Tailwind Css
-- Context
-- useReducer
+- Redux (toolkit)
 - api from https://fakestoreapi.com
 
 ### Libraries Used:
