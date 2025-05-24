@@ -1,7 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 
-// import { useProductDetails } from '../context/ProductsContext'
 import { SiOpenproject } from 'react-icons/si'
 import { IoMdPricetag } from 'react-icons/io'
 import { FaArrowLeft } from 'react-icons/fa'
@@ -15,7 +14,6 @@ function DetailsPage() {
   const dispatch=useDispatch()
 
   const productDetails=useSelector((store)=>store.products.products.find((i)=>i.id===+id))
-  // const productDetails=useProductDetails(+id)
 
   useEffect(()=>{
   dispatch(fetchProducts())

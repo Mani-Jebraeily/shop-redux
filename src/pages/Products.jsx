@@ -7,22 +7,18 @@ import SearchBox from '../components/SearchBox'
 import SideBar from '../components/SideBar'
 import { fetchProducts } from '../features/product/productsSlice.js'
 import {useSelector,useDispatch} from "react-redux"
-// import { useProducts } from '../context/ProductsContext'
 
 
 
 function Products() {
   const dispatch=useDispatch()
   const {products,loading}=useSelector((store)=>store.products)
-  // const products=[]
-  // const products=useProducts()
   const [displayed,setDisplayed]=useState([])
 
   const [search,setSearch]=useState("")
   const [query,setQuery]=useState([])
   const [searchParams,setSearchParams]=useSearchParams()
 
-// console.log(query)
 
 useEffect(()=>{
   dispatch(fetchProducts())
@@ -42,7 +38,6 @@ useEffect(()=>{
    let finalProducts= searchProducts(products,query.search)
    finalProducts=filterProducts(finalProducts,query.category)
    setDisplayed(finalProducts)
-  //  console.log(query)
   },[query])
 
 

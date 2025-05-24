@@ -12,7 +12,6 @@ function CheckOutPage() {
   const state=useSelector((store)=>store.cart)
 
 
-  console.log(state.selectedItems.length)
   return (
     
     <>

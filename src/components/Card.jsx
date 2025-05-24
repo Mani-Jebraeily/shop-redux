@@ -10,7 +10,6 @@ import { addItem, decrease, increase, removeItem } from '../features/cart/cartSl
 function Card({data}) {
     const {id,image,title,price}=data;
     const state=useSelector((store)=>store.cart)
-    console.log(state)
     const quantity=producyQuantity(state,id)
     const dispath=useDispatch()
   return (
