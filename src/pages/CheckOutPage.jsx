@@ -1,14 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-// import { useCard } from '../context/CardProvider'
 import BasketCard from '../components/BasketCard'
 import BasketSideBar from '../components/BasketSideBar'
 import { FaArrowLeft } from 'react-icons/fa'
 
 import basket from '../assets/basket.png'
+import {  useSelector } from 'react-redux'
+
+
 function CheckOutPage() {
-  // const [state,dispatch]=useCard()
-  // const clickHandeler=(type,payload)=>{dispatch({type,payload})}
+  const state=useSelector((store)=>store.cart)
+
 
   console.log(state.selectedItems.length)
   return (
@@ -31,9 +33,9 @@ function CheckOutPage() {
       }
       {!!state.selectedItems.length&&
       <>
-       <BasketSideBar state={state} clickHandeler={clickHandeler}/>
+       <BasketSideBar state={state} />
        <div className='w-[100%]'>
-        {state.selectedItems.map(i=>(<BasketCard key={i.id} clickHandeler={clickHandeler} data={i}/>))}
+        {state.selectedItems.map(i=>(<BasketCard key={i.id}  data={i}/>))}
       </div>
       
       </>
